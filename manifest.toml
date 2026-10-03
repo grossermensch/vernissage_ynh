@@ -31,14 +31,10 @@ multi_instance = true
 
 ldap = false
 
-# FIXME: replace with true, false, or "not_relevant".
-# Not to confuse with the "ldap" key: the "sso" key corresponds to wether or not a user is *automatically logged-in*
-# on the app when logged-in on the YunoHost portal.
 sso = false
 
-# FIXME: replace with an **estimate** minimum disk and RAM requirements. e.g. 20M, 400M, 1G...
-disk = "1G"
-ram.build = "500M"
+disk = "2G"
+ram.build = "1G"
 ram.runtime = "2G"
 
 [install]
@@ -93,12 +89,6 @@ ram.runtime = "2G"
     amd64.sha256 = "b1a680a30c7b41c487a600fd7fcd6ca104ade6d1b7a8f5f9d7ba257a290df3e3"
     arm64.url = "https://download.swift.org/swift-6.4.0-release/debian12-aarch64/swift-6.4.0-RELEASE/swift-6.4.0-RELEASE-debian12-aarch64.tar.gz"
     arm64.sha256 = "a2b1b60b3dec29dcedae157f616f4165ea822953b12b7ec03bdeef935ec4f951"
-    # These infos are used by https://github.com/YunoHost/apps_tools/blob/main/autoupdate_app_sources/autoupdate_app_sources.py
-    # to auto-update the previous asset urls and sha256sum + manifest version
-    # assuming the upstream's code repo is on github and relies on tags or releases
-    # See the 'sources' resource documentation for more details
-
-    # autoupdate.strategy = "latest_github_tag"
 
     [resources.system_user]
     allow_email = true
@@ -109,30 +99,12 @@ ram.runtime = "2G"
     [resources.data_dir]
 
     [resources.permissions]
-    # This will configure SSOwat permission for $domain/$path/
-    # The initial allowed group of user is configured via the init_main_permission question (public=visitors, private=all_users)
     main.url = "/"
 
     [resources.ports]
-    # This will pick a random port for reverse-proxying and store it as the $port setting
 
     [resources.apt]
-    # This will automatically install/uninstall the following apt packages
-    # and implicitly define the $phpversion setting as 8.0 (if phpX.Y-foobar dependencies are listed)
-    packages = "binutils-gold \
-      gcc \
-      git \
-      libcurl4-openssl-dev \
-      libedit-dev \
-      libicu-dev \
-      libncurses-dev \
-      libpython3-dev \
-      libsqlite3-dev \
-      libxml2-dev \
-      pkg-config \
-      tzdata \
-      uuid-dev"
+    packages = "postgresql, redis-server, libgd-dev, libexif-dev, libiptcdata0-dev, binutils-gold, gcc, git, libcurl4-openssl-dev, libedit-dev, libicu-dev, libncurses-dev, libpython3-dev, libsqlite3-dev, libxml2-dev, pkg-config, tzdata, uuid-dev"
 
     [resources.database]
-    # This will automatically provision/deprovison a MySQL DB and store the corresponding credentials in settings $db_user, $db_name, $db_pwd
-    type = "pgsql"
+    type = "postgresql"
