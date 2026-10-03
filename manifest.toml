@@ -18,9 +18,6 @@ admindoc = "https://docs.joinvernissage.org/documentation/vernissageserver"
 userdoc = "https://yunohost.org/apps"
 code = "https://github.com/VernissageApp"
 
-# FIXME: optional but recommended (or remove if irrelevant / not applicable).
-# This is meant to be an URL where people can financially support this app, especially when its development is based
-# on volunteers and/or financed by its community. YunoHost may later advertise it in the webadmin.
 fund = "https://vernissage.photos/support"
 
 [integration]
@@ -39,52 +36,34 @@ ram.runtime = "2G"
 
 [install]
     [install.domain]
-    # this is a generic question - ask strings are automatically handled by YunoHost's core
     type = "domain"
 
     [install.init_main_permission]
-    # this is a generic question - ask strings are automatically handled by YunoHost's core
-    # This won't be saved as setting and will instead be used to initialize the SSOwat permission
     type = "group"
     default = "visitors"
 
     [install.admin]
-    # this is a generic question - ask strings are automatically handled by YunoHost's core
     type = "user"
 
     [install.password]
-    # this is a generic question - ask strings are automatically handled by YunoHost's core
-    # Note that user-provided passwords questions are not automatically saved as setting
     help.en = "Set your admin password"
-    #help.fr = "Utilisez le champ aide pour ajouter une information à l'intention de l'administrateur à propos de cette question."
     type = "password"
 
 [resources]
-    # See the packaging documentation for the full set
-    # of explanation regarding the behavior and properties for each of those
 
     [resources.sources]
 
     [resources.sources.server]
-    # This will pre-fetch the asset which can then be deployed during the install/upgrade scripts with :
-    #    ynh_setup_source --dest_dir="$install_dir"
-    # You can also define other assets than "main" and add --source_id="foobar" in the previous command
     url = "https://github.com/VernissageApp/VernissageServer/archive/refs/tags/v1.43.0.zip"
     sha256 = "6d68da1710fc085b50556f23d9a0804da133ccc448ad46d54511fa6b8a805ae5"
     autoupdate.strategy = "latest_github_tag"
     
     [resources.sources.web]
-    # This will pre-fetch the asset which can then be deployed during the install/upgrade scripts with :
-    #    ynh_setup_source --dest_dir="$install_dir"
-    # You can also define other assets than "main" and add --source_id="foobar" in the previous command
     url = "https://github.com/VernissageApp/VernissageWeb/archive/refs/tags/v1.43.0.zip"
     sha256 = "4b4fe599ab472d7593ff11355961686c887c336d4b506b276666f28d1497ab71"
     autoupdate.strategy = "latest_github_tag"
 
     [resources.sources.swift]
-    # This will pre-fetch the asset which can then be deployed during the install/upgrade scripts with :
-    #    ynh_setup_source --dest_dir="$install_dir"
-    # You can also define other assets than "main" and add --source_id="foobar" in the previous command
     amd64.url = "https://download.swift.org/swift-6.4.0-release/debian12/swift-6.4.0-RELEASE/swift-6.4.0-RELEASE-debian12.tar.gz"
     amd64.sha256 = "b1a680a30c7b41c487a600fd7fcd6ca104ade6d1b7a8f5f9d7ba257a290df3e3"
     arm64.url = "https://download.swift.org/swift-6.4.0-release/debian12-aarch64/swift-6.4.0-RELEASE/swift-6.4.0-RELEASE-debian12-aarch64.tar.gz"
