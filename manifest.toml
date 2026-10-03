@@ -85,6 +85,14 @@ ram.runtime = "2G"
     sha256 = "4b4fe599ab472d7593ff11355961686c887c336d4b506b276666f28d1497ab71"
     autoupdate.strategy = "latest_github_tag"
 
+    [resources.sources.swift]
+    # This will pre-fetch the asset which can then be deployed during the install/upgrade scripts with :
+    #    ynh_setup_source --dest_dir="$install_dir"
+    # You can also define other assets than "main" and add --source_id="foobar" in the previous command
+    amd64.url = "https://download.swift.org/swift-6.4.0-release/debian12/swift-6.4.0-RELEASE/swift-6.4.0-RELEASE-debian12.tar.gz"
+    amd64.sha256 = "b1a680a30c7b41c487a600fd7fcd6ca104ade6d1b7a8f5f9d7ba257a290df3e3"
+    arm64.url = "https://download.swift.org/swift-6.4.0-release/debian12-aarch64/swift-6.4.0-RELEASE/swift-6.4.0-RELEASE-debian12-aarch64.tar.gz"
+    arm64.sha256 = "a2b1b60b3dec29dcedae157f616f4165ea822953b12b7ec03bdeef935ec4f951"
     # These infos are used by https://github.com/YunoHost/apps_tools/blob/main/autoupdate_app_sources/autoupdate_app_sources.py
     # to auto-update the previous asset urls and sha256sum + manifest version
     # assuming the upstream's code repo is on github and relies on tags or releases
@@ -93,15 +101,12 @@ ram.runtime = "2G"
     # autoupdate.strategy = "latest_github_tag"
 
     [resources.system_user]
-    # This will provision/deprovision a unix system user
-
+    allow_email = true
+    
     [resources.install_dir]
-    # This will create/remove the install dir as /var/www/$app
-    # and store the corresponding setting $install_dir
+    group = "www-data:r-x"
 
     [resources.data_dir]
-    # This will create/remove the data dir as /home/yunohost.app/$app
-    # and store the corresponding setting $data_dir
 
     [resources.permissions]
     # This will configure SSOwat permission for $domain/$path/
@@ -114,8 +119,20 @@ ram.runtime = "2G"
     [resources.apt]
     # This will automatically install/uninstall the following apt packages
     # and implicitly define the $phpversion setting as 8.0 (if phpX.Y-foobar dependencies are listed)
-    packages = "mariadb-server, deb1, deb2, php8.3-foo, php8.3-bar"
+    packages = "binutils-gold \
+      gcc \
+      git \
+      libcurl4-openssl-dev \
+      libedit-dev \
+      libicu-dev \
+      libncurses-dev \
+      libpython3-dev \
+      libsqlite3-dev \
+      libxml2-dev \
+      pkg-config \
+      tzdata \
+      uuid-dev"
 
     [resources.database]
     # This will automatically provision/deprovison a MySQL DB and store the corresponding credentials in settings $db_user, $db_name, $db_pwd
-    type = "mysql"
+    type = "pgsql"
