@@ -46,23 +46,11 @@ ram.runtime = "2G"
     # this is a generic question - ask strings are automatically handled by YunoHost's core
     type = "domain"
 
-    [install.path]
-    # this is a generic question - ask strings are automatically handled by YunoHost's core
-    type = "path"
-    default = "/example"
-
     [install.init_main_permission]
     # this is a generic question - ask strings are automatically handled by YunoHost's core
     # This won't be saved as setting and will instead be used to initialize the SSOwat permission
     type = "group"
     default = "visitors"
-
-    [install.language]
-    ask.en = "Choose the application language"
-    ask.fr = "Choisissez la langue de l'application"
-    type = "select"
-    choices = ["fr", "en"]
-    default = "fr"
 
     [install.admin]
     # this is a generic question - ask strings are automatically handled by YunoHost's core
@@ -71,8 +59,8 @@ ram.runtime = "2G"
     [install.password]
     # this is a generic question - ask strings are automatically handled by YunoHost's core
     # Note that user-provided passwords questions are not automatically saved as setting
-    help.en = "Use the help field to add an information for the admin about this question."
-    help.fr = "Utilisez le champ aide pour ajouter une information à l'intention de l'administrateur à propos de cette question."
+    help.en = "Set your admin password"
+    #help.fr = "Utilisez le champ aide pour ajouter une information à l'intention de l'administrateur à propos de cette question."
     type = "password"
 
 [resources]
@@ -81,12 +69,21 @@ ram.runtime = "2G"
 
     [resources.sources]
 
-    [resources.sources.main]
+    [resources.sources.server]
     # This will pre-fetch the asset which can then be deployed during the install/upgrade scripts with :
     #    ynh_setup_source --dest_dir="$install_dir"
     # You can also define other assets than "main" and add --source_id="foobar" in the previous command
-    url = "https://github.com/foo/bar/archive/refs/tags/v1.2.3.tar.gz"
-    sha256 = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+    url = "https://github.com/VernissageApp/VernissageServer/archive/refs/tags/v1.43.0.zip"
+    sha256 = "6d68da1710fc085b50556f23d9a0804da133ccc448ad46d54511fa6b8a805ae5"
+    autoupdate.strategy = "latest_github_tag"
+    
+    [resources.sources.web]
+    # This will pre-fetch the asset which can then be deployed during the install/upgrade scripts with :
+    #    ynh_setup_source --dest_dir="$install_dir"
+    # You can also define other assets than "main" and add --source_id="foobar" in the previous command
+    url = "https://github.com/VernissageApp/VernissageWeb/archive/refs/tags/v1.43.0.zip"
+    sha256 = "4b4fe599ab472d7593ff11355961686c887c336d4b506b276666f28d1497ab71"
+    autoupdate.strategy = "latest_github_tag"
 
     # These infos are used by https://github.com/YunoHost/apps_tools/blob/main/autoupdate_app_sources/autoupdate_app_sources.py
     # to auto-update the previous asset urls and sha256sum + manifest version
