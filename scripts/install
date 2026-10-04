@@ -26,6 +26,12 @@ source /usr/share/yunohost/helpers
 ### $app is the app id (i.e. 'example' for first install,
 ### or 'example__2', '__3'... for multi-instance installs)
 
+#Install Swift
+#Build Vernissage Server
+#Build Vernissage Web 
+#Get Redis Database 
+
+
 #=================================================
 # INITIALIZE AND STORE SETTINGS
 #=================================================
