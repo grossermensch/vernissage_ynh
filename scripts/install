@@ -7,32 +7,12 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
-### Install parameters are automatically saved as settings
-###
-### Settings are automatically loaded as bash variables
-### in every app script context, therefore typically these will exist:
-### - $domain
-### - $path
-### - $language
-### ... etc
-###
-### Resources defined in the manifest are provisioned prior to this script
-### and corresponding settings are also available, such as:
-### - $install_dir
-### - $port
-### - $db_name
-### ...
-###
-### $app is the app id (i.e. 'example' for first install,
-### or 'example__2', '__3'... for multi-instance installs)
-
 #Install Swift
 #Build Vernissage Server
 #Build Vernissage Web 
 #Get Redis Database 
 #Add system configurations 
 #Start systemd service 
-
 
 #=================================================
 # INITIALIZE AND STORE SETTINGS
@@ -56,7 +36,10 @@ ynh_exec_as_app export PATH=$install_dir/swift/usr:"${PATH}"
 ynh_script_progression "Setting up Vernissage Server..."
 ynh_setup_source --source_id="server" --dest_dir="$install_dir/server"
 
-
+pushd "$install_dir/server"
+    ynh_exec_as_app swift package resolve
+    ynh_exec_as_app swift build -c release
+popd
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
