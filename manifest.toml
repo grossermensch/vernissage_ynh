@@ -81,6 +81,7 @@ ram.runtime = "2G"
     main.url = "/"
 
     [resources.ports]
+    main.default = 8080
 
     [resources.apt]
     packages = "postgresql, redis-server, libgd-dev, libexif-dev, libiptcdata0-dev, binutils-gold, gcc, git, libcurl4-openssl-dev, libedit-dev, libicu-dev, libncurses-dev, libpython3-dev, libsqlite3-dev, libxml2-dev, pkg-config, tzdata, uuid-dev"
